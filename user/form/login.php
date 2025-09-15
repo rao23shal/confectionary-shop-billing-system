@@ -43,3 +43,6 @@
 </body>
 
 </html>
+
+<!--value- 7f05770413f0644f2a5c639afb54a3a3 -->
+<!-- http://localhost/confectionary-shop-billing-system/index1.php -->

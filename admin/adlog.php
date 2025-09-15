@@ -1,21 +1,30 @@
 <?php 
-$username =$_POST['username'];
-$password =$_POST['password'];
-$con = mysqli_connect('localhost','root','','user_data');
-$result=mysqli_query($con,"select * from admin where username ='$username'  and password= '$password' ");
 session_start();
-if(mysqli_num_rows($result)){
-    
-    echo"
+$con = mysqli_connect('localhost','root','','user_data');
+
+if(!$con){
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$stmt = $con->prepare("SELECT * FROM admin WHERE username=? AND password=?");
+$stmt->bind_param("ss", $username, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if($result->num_rows > 0){
+    echo "
     <script>
     alert('Successfully login!');
-     window.location.href='admin_panel.php';
-     </script>";
-}
-else{
-    echo"
+    window.location.href='admin_panel.php';
+    </script>";
+} else {
+    echo "
     <script>
     alert('Incorrect username/email/password!');
-     </script>";
+    window.location.href='login.php';
+    </script>";
 }
 ?>
