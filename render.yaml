@@ -1,24 +1,46 @@
-# render.yaml - Render service config
+# render.yaml - create a web service and a mysql service
 services:
   - type: web
-    name: confectionary-shop
-    env: php
-    plan: free
+    name: confectionary-shop-billing-system
+    env: docker
     branch: main
-    # buildCommand can be blank for simple PHP apps
+    plan: free
     buildCommand: ""
-    # startCommand: run PHP built-in server on port 10000 (Render expects binding to 0.0.0.0)
-    startCommand: php -S 0.0.0.0:10000 -t .
+    startCommand: ""
+    dockerfilePath: ./Dockerfile
+    # web service env vars (you can also set them in dashboard)
     envVars:
       - key: MYSQL_HOST
-        # replace with your MySQL host or leave placeholder and set in Render dashboard
-        value: "localhost";
-     - key: MYSQL_USER
-        value: YOUR_DB_USERNAME
+        value: "localhost"   # internal service name (lowercase)
+      - key: MYSQL_USER
+        value: appuser
       - key: MYSQL_PASSWORD
-        value: YOUR_DB_PASSWORD
+        value: 'cRkUvjM59t99sAB0iEkUQNp347DlohR6'
       - key: MYSQL_DATABASE
-        value: YOUR_DB_NAME
+        value: user_data_d3ik
+      - key: MYSQL_PORT
+        value: "5432"
+
+  - type: service
+    name: mySql
+    env: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile-mysql
+    # persistent volume for DB data
+    disk:
+      name: mysql-disk
+      size_gb: 1
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: 'cRkUvjM59t99sAB0iEkUQNp347DlohR6'
+      - key: MYSQL_DATABASE
+        value: user_data_d3ik
+      - key: MYSQL_USER
+        value: root
+      - key: MYSQL_PASSWORD
+        value: 'postgresql://root:cRkUvjM59t99sAB0iEkUQNp347DlohR6@dpg-d343daa4d50c73enf9ig-a/user_data_d3ik'
+
 
 
 

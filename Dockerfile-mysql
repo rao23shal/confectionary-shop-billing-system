@@ -1,0 +1,9 @@
+# Dockerfile-mysql — run official MySQL image
+FROM mysql:8.0
+
+# The MySQL image uses env vars for initialization:
+# MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD
+# We do not run extra commands here; Render will pass env vars from render.yaml or dashboard
+
+# Expose default MySQL port
+EXPOSE 5432
