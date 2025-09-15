@@ -1,14 +1,15 @@
 <?php
-$host = "localhost";      // Database host (keep as localhost if using XAMPP)
-$user = "root";           // Default XAMPP MySQL username
-$pass = "";               // Default XAMPP MySQL password is empty
-$db   = "user-data"; // Database name (create this in phpMyAdmin)
+// db_connect.php
+// Tries env vars first (Render/prod). Falls back to localhost for local dev.
 
-// Create connection
+$host = getenv('MYSQL_HOST') ?: 'localhost';
+$user = getenv('MYSQL_USER') ?: 'root';
+$pass = getenv('MYSQL_PASSWORD') ?: '';
+$db   = getenv('MYSQL_DATABASE') ?: 'user_data';
+
 $conn = mysqli_connect($host, $user, $pass, $db);
 
-// Check connection
 if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+    die("Database connection failed: " . mysqli_connect_error());
 }
 ?>

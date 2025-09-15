@@ -1,0 +1,27 @@
+# render.yaml - Render service config
+services:
+  - type: web
+    name: confectionary-shop
+    env: php
+    plan: free
+    branch: main
+    # buildCommand can be blank for simple PHP apps
+    buildCommand: ""
+    # startCommand: run PHP built-in server on port 10000 (Render expects binding to 0.0.0.0)
+    startCommand: php -S 0.0.0.0:10000 -t .
+    envVars:
+      - key: MYSQL_HOST
+        # replace with your MySQL host or leave placeholder and set in Render dashboard
+        value: "localhost";
+     - key: MYSQL_USER
+        value: YOUR_DB_USERNAME
+      - key: MYSQL_PASSWORD
+        value: YOUR_DB_PASSWORD
+      - key: MYSQL_DATABASE
+        value: YOUR_DB_NAME
+
+
+
+
+# 4d471e2ca4d1a8ba5c89209144ca7517
+# service id - srv-d342oper433s73900d10
