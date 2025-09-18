@@ -7,3 +7,11 @@ FROM mysql:8.0
 
 # Expose default MySQL port
 EXPOSE 5432
+
+
+
+# MYSQL_HOST     = "dpg-d343daa4d50c73enf9ig-a"
+# MYSQL_USER     = "root"
+# MYSQL_PASSWORD = "cRkUvjM59t99sAB0iEkUQNp347DlohR6"
+# MYSQL_DATABASE = "user_data_d3ik"
+# MYSQL_PORT     = 5432
